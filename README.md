@@ -15,7 +15,7 @@ Para realizar la instalación de ambos *spftwares* sigue los siguientes pasos:
 
 Si quedó todo bien instalado, cuando abras RStudio deberías ver algo así:
 
-![Interfaz RStudio]("images/instalacion rstudio.png")
+![Interfaz RStudio]("images/instalacion rstudio.PNG")
 
 R y RStudio liberan nuevas versiones con cierta regularidad, por lo que tu pantalla podría verse levemente diferente.
 
