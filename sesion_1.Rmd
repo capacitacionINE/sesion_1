@@ -14,7 +14,6 @@ output:
       countIncrementalSlides: False
 ---
 
-
 class: center, middle
 
 .linea-superior[]
@@ -77,7 +76,7 @@ background-position: 100% 0%
 
 # Estructura PE SSCC
 
-![](imagenes/estructura_sscc1.png)
+![](imagenes/estructura_sscc1.PNG)
 
 ---
 
@@ -87,7 +86,7 @@ background-position: 100% 0%
 
 # Estructura PE SSCC
 
-![](imagenes/estructura_sscc2.png)
+![](imagenes/estructura_sscc2.PNG)
 
 ---
 background-image: url("imagenes/fondo2.PNG")
@@ -405,7 +404,7 @@ background-position: 100% 0%
 
 --
 
-.center[<img src="imagenes/ipp.png" width="400"/>]
+.center[<img src="imagenes/ipp.PNG" width="400"/>]
 
 ---
 
@@ -502,10 +501,14 @@ En esta ventana también aparecen los resultados de las instrucciones.
 --
 
 Los comandos que se escriban aquí no serán grabados para un nuevo inicio de sesión.
+
+--
+
+El código escrito en consola se ejecuta con la tecla **Enter**.
   
 --
 
-- Una práctica habitual es guardar rutinas completas en archivos *script*.
+- Sin embargo, **una práctica habitual y recomendada** es guardar rutinas completas en archivos *script*.
   
 ---
 
@@ -532,5 +535,65 @@ Resulta conveniente guardar múltiples instrucciones en un archivo de texto (*sc
 --
 
 Además resulta mucho más fácil compartir nuestro trabajo de esta manera.
+
+--
+
+Para ejecutar el código en *script* puedes utilizar sl *shortcut* **Ctrl + Enter**.
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Primeras operaciones en R
+
+--
+
+.medium-par[R puede ser usado como una calculadora.]
+
+--
+
+Pueden probarlo ustedes mismos en su consola o script
+
+```{r}
+4 + 5
+```
+
+
+
+
+
+
+
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+Antes de importar recordar setear ruta de trabajo
+
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Referencias
+
+.medium-par[Nada de esto sería posible sin:]
+
+- [Advanced R, de Hadley Wickham](http://adv-r.had.co.nz/Introduction.html)
+
+- [Data wrangling, exploration, and analysis with R, de Jenny Bryan](http://stat545.com/index.html)
+
+- [Introduction to R, de Data Carpentry](https://datacarpentry.org/R-genomics/01-intro-to-R.html#functions)
+
+- [Xaringan: Presentation Ninja, de Yihui Xie](https://github.com/yihui/xaringan). Para generar esta presentación con la plantilla ninja ⚔
 
 
