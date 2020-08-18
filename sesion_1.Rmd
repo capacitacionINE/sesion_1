@@ -746,6 +746,89 @@ Para obtener ayuda sobre una función lo hacemos de la siguiente forma:
 help(round) # help también es una función
 ```
 
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Funciones en R
+
+--
+
+Gran parte de las funciones que utilizamos en R vienen contenidas en **paquetes** (*packages*).
+
+--
+
+Las funciones que acabamos de conocer pertenecen al paquete *base*, que viene con el *software* R.
+
+--
+
+.medium-par[Sin embargo, **existen más de 10.000 paquetes en R.**]
+
+--
+
+.medium-par[La mayoría Creados por sus usuarios 🤯🤯]
+
+--
+
+Más adelante descargaremos y utilizaremos algunas librerías de R.
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Tipos de datos en R
+
+--
+
+Conoceremos algunos de los tipos de datos más utilizados.
+
+--
+
+## Vectores
+
+--
+
+Es el objeto más básico en **R**.
+
+--
+
+Un vector es una forma de **almacenar datos** que permiten contener **una serie de valores del mismo tipo**.
+
+--
+
+En términos simples es lo que entendemos por **variable**.
+
+--
+
+Veamos algunos ejemplos. 
+
+--
+
+```{r, eval = F}
+animales <- c("gato", "perro", "gallina")
+a <- c(1, 5, 6, 9:12)
+b <- c(1, 2, 3, "gato")
+```
+
+--
+
+La función "c" (combine) permite unir valores en un vector.
+
+--
+
+¿De qué tipo son los vectores creados? ¿
+
+
+
+
+
+
+
+
 
 ---
 
@@ -787,6 +870,8 @@ background-position: 100% 0%
 
 .medium-par[Nada de esto sería posible sin:]
 
+- [R for Data Science, de Hadley Wickham](https://r4ds.had.co.nz/)
+
 - [Advanced R, de Hadley Wickham](http://adv-r.had.co.nz/Introduction.html)
 
 - [Data wrangling, exploration, and analysis with R, de Jenny Bryan](http://stat545.com/index.html)
@@ -795,3 +880,6 @@ background-position: 100% 0%
 
 - [Xaringan: Presentation Ninja, de Yihui Xie](https://github.com/yihui/xaringan). Para generar esta presentación con la plantilla ninja ⚔
 
+.medium-par[R for Data Science tiene una traducción al español realizada por la comunidad hispana de R:]
+
+- [R para ciencia de datos, de Hadley Wickham](https://es.r4ds.hadley.nz/)
