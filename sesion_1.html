@@ -136,7 +136,7 @@ background-position: 100% 0%
 
 --
 
-- Si van surgiendo dudas, pueden consultar **levantando su mano** (Teams) durante la clase.
+- Si van surgiendo dudas, pueden consultar durante la clase.
 
 --
 
@@ -144,7 +144,7 @@ background-position: 100% 0%
 
 --
 
-- Al finalizar cada sesión se les presentará un desafío para resolver durante la semana 🏠.
+- Al finalizar cada sesión (salvo la primera) se les presentará un desafío para resolver durante la semana 🏠.
 
 
 ---
@@ -155,7 +155,7 @@ background-position: 100% 0%
 
 # Contenidos de la capacitación
 
-.medium-par[**PARTE I: HERRAMIENTAS BÁSICAS**]
+.medium-par[**Parte I: Herramientas básicas**]
 
 --
 
@@ -180,7 +180,7 @@ background-position: 100% 0%
 **Sesión 3:** Procesamiento de bases de datos (2)
 
     - Unión de bases de datos (joins, binds)
-    - Manejo de variables de tiempo (fechas, horas)
+    - Manejo de variables de tiempo (fechas)
     - Manejo de variables factor
 
 ---
@@ -210,7 +210,7 @@ background-position: 100% 0%
 
 --
 
-.medium-par[**PARTE II: APLICANDO LO APRENDIDO**]
+.medium-par[**Parte II: Aplicaciones para el negocio**]
 
 **Sesión 6:** Validación de datos
 
@@ -272,7 +272,7 @@ background-position: 100% 0%
 
     - ¿Por qué es importante el trabajo reproducible? 
     - Introducción a Rmarkdown 
-        - Insalación 
+        - Instalación 
         - ¿Qué es RMarkdown? 
         - Creando mi primer reporte con RMarkdown 
     - Introducción a git y github
@@ -311,11 +311,11 @@ background-position: 100% 0%
 
 --
 
-**R** es gratis, su código es abierto y se encuentra disponible en la mayoría de las plataformas (Windows, Mac OS, Linux).
+**R** es gratis, su código es abierto y **se encuentra disponible en la mayoría de las plataformas** (Windows, Mac OS, Linux).
 
 --
 
-¡Es muy versátil! Hoy es utilizado para abordar problemas de distintas disciplinas, sobre todo de estadística.
+**¡Es muy versátil!** Hoy es utilizado para abordar problemas de **distintas disciplinas**, sobre todo de estadística.
 
 --
 
@@ -355,7 +355,7 @@ Cuenta con **poderosas herramientas para comunicar resultados**. Varios paquetes
 
 --
 
-Cuenta con entorno de desarrollo interactivo diseñado especialmente para el análisis de datos y la programación estadística (**RStudio**).
+Cuenta con un **entorno de desarrollo interactivo** diseñado especialmente para el análisis de datos y la programación estadística (**RStudio**).
 
 --
 
@@ -387,7 +387,7 @@ background-position: 100% 0%
 
 --
 
-.medium-par[**Boletín índice de Precios al Productor:**]
+.medium-par[**Boletín índice de Precios al Productor (IPP):**]
 
 --
 
@@ -451,7 +451,25 @@ background-position: 100% 0%
 
 --
 
-.medium-par[Existen dos maneras principales de interactuar con **R**:]
+.center[.medium-par-red[La interfaz de RStudio está distribuida de la siguiente manera]]
+
+--
+
+![](imagenes/interfaz_rstudio.PNG)
+
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Interactuando con R
+
+--
+
+.medium-par[Existen dos formas principales de interactuar con **R**:]
 
 --
 
@@ -483,11 +501,11 @@ El símbolo `&gt;` significa que **R** está listo para que le entreguemos una i
 
 --
 
-En esta ventana también aparecen los resultados de las instrucciones.
+En esta ventana también aparecen los **resultados** de las instrucciones.
 
 --
 
-Los comandos que se escriban aquí no serán grabados para un nuevo inicio de sesión.
+Los comandos que se escriban aquí **no serán grabados** para un nuevo inicio de sesión.
 
 --
 
@@ -495,7 +513,7 @@ El código escrito en consola se ejecuta con la tecla **Enter**.
   
 --
 
-- Sin embargo, **una práctica habitual y recomendada** es guardar rutinas completas en archivos *script*.
+.medium-par-red[Sin embargo, **una práctica habitual y recomendada** es guardar rutinas completas en archivos *script*.]
   
 ---
 
@@ -509,23 +527,31 @@ background-position: 100% 0%
 
 --
 
-Es común que una tarea la queramos repetir más de una vez.
+Es común que una tarea la queramos **repetir** más de una vez.
 
 --
 
-Esta tarea muchas veces involucra un conjunto de tareas, por lo que es poco eficiente utilizar la consola para realizarlas.
+Esta tarea muchas veces involucra un conjunto de tareas, por lo que es **poco eficiente utilizar la consola** para realizarlas.
 
 --
 
-Resulta conveniente guardar múltiples instrucciones en un archivo de texto (*script*) que luego nos permita volver a ejecutar estas tareas.
+Resulta conveniente guardar múltiples instrucciones en un archivo de texto (*script*) que luego nos permita **volver a ejecutar** estas tareas.
 
 --
 
-Además resulta mucho más fácil compartir nuestro trabajo de esta manera.
+Además resulta mucho **más fácil compartir** nuestro trabajo de esta manera.
 
 --
 
-Para ejecutar el código en *script* puedes utilizar sl *shortcut* **Ctrl + Enter**.
+Para ejecutar el código en *script* puedes utilizar el *shortcut* .pur[Ctrl + Enter].
+
+--
+
+👁️ Para comentar en el *script* se utiliza el signo gato** (#)**
+
+--
+
+El signo **#** también sirve para **silenciar** código sin tener que borrarlo. 
 
 ---
 
@@ -639,11 +665,11 @@ background-position: 100% 0%
 
 --
 
-1- ¿Qué sucede si cambiamos el valor de "a" por 20 y luego realizamos la última operación?
+1- ¿Qué sucede si cambiamos el valor de "a" por 45 y luego realizamos la última operación?
 
 --
 
-2- ¿Es posible asignar el resultado a una nueva variable "c"? ¿Cómo lo harías?
+2- ¿Es posible asignar el resultado a una nueva variable "c"? **¿Cómo lo harían?**
 
 
 ---
@@ -656,7 +682,7 @@ background-position: 100% 0%
 
 --
 
-La mayor parte del tiempo, en cualquier *software*, usamnos **funciones** integradas.
+La mayor parte del tiempo, en cualquier *software*, usamos **funciones** integradas.
 
 --
 
@@ -692,7 +718,7 @@ sum(3,3)
 
 --
 
-Pero `sum()` es una función muy versatil y más potente.
+Pero `sum()` es una función muy versátil y más potente.
 
 
 ```r
@@ -744,7 +770,7 @@ floor(9.556789) # truncar
 
 --
 
-**Las funciones tienen argumentos**, y podemos conocerlos con preguntando con `args()`
+**Las funciones tienen argumentos**, y podemos consultarlos con la función `args()`
 
 
 ```r
@@ -766,7 +792,7 @@ background-position: 100% 0%
 
 --
 
-El argumento "digits" me permite indicarle a round cuántos decimales quiero. **Pero si no le digo asume que es cero**.
+El argumento "digits" me permite indicarle a `round()` cuántos decimales quiero. **Pero si no le digo asume que es cero**.
 
 
 ```r
@@ -828,7 +854,7 @@ Las funciones que acabamos de conocer pertenecen al paquete *base*, que viene co
 
 --
 
-.medium-par[La mayoría Creados por sus usuarios 🤯🤯]
+.medium-par[La mayoría creados por sus usuarios 🤯🤯]
 
 --
 
@@ -860,15 +886,16 @@ Un vector es una forma de **almacenar datos** que permite contener **una serie d
 
 --
 
-En términos simples es lo que entendemos por **variable**.
-
---
-
 Veamos algunos ejemplos. 
 
 --
 
 
+```r
+nombres &lt;- c("jacqueline", "miguel","lorena", "luis")
+a &lt;- c(1, 5, 6, 9:12)
+b &lt;- c(1, 2, 3, "gato")
+```
 
 --
 
@@ -880,6 +907,10 @@ La función "c" (combine) permite unir valores u objetos.
 
 
 - ¿De qué tipo son los vectores creados?
+
+--
+
+(con la función `length()` pueden contar los elementos de un vector)
 
 ---
 
@@ -926,7 +957,9 @@ typeof(b)
 ## [1] "character"
 ```
 
-.medium-par[Que los vectores sea antómicos ⚛️ significa .medium-par-red[solo pueden contener un tipo de datos.]]
+--
+
+.medium-par[Que los vectores sea antómicos ⚛️ significa que .medium-par-red[solo pueden contener un tipo de datos.]]
 
 ---
 
@@ -954,6 +987,11 @@ Una secuencia sencilla también podemos crearla de la siguiente manera.
 
 ```r
 y &lt;- 1:20
+y
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
 ```
 
 ---
@@ -986,6 +1024,8 @@ Recibe 4 argumentos: *from*, *to*, *length* y *by*.
 ```r
 a &lt;- seq(from = ¿?, to = ¿?, by = ¿?)
 ```
+
+--
 
 .medium-par-red[¿Cómo crearían un vector que vaya del 1 al 10 y contenga 100 valores?]
 
@@ -1188,15 +1228,27 @@ background-position: 100% 0%
 # Mini-ejercicio 2
 
 
+--
+
 1. Crea un vector numérico del 1 al 30 y asígnalo a un objeto (ponle el nombre que quieras).
+
+--
 
 2. Selecciona el valor de la quinta posición.
 
+--
+
 3. Selecciona los valores mayores a 13.
+
+--
 
 4. Crea un segundo objeto a partir del primero que no contenga el último valor (30).
 
+--
+
 5. Crea un tercer vector que vaya del 0 al 30, pero .pur[que contenga solo los números pares].
+
+--
 
 .center[.medium-par-red[Recuerda que para crear objetos o asignar valores debes usar ** &lt;-**]]
 
@@ -1279,11 +1331,11 @@ Comparaciones en **R** tienen como resultado valores lógicos: `TRUE`, `FALSE` o
 
 --
 
-Tal como en los operadores aritméticos, las comparaciones lógicas con un vector son aplicadas elemento a elemento y su resultado es un vector de valores de verdad (vector lógico).
+Tal como en los operadores aritméticos, las comparaciones lógicas con un vector son aplicadas **elemento a elemento** y su resultado es un vector de valores de verdad (vector lógico).
 
 --
 
-Los operadores lógicos son muy usados para extraer información que cumple con ciertas condiciones de determinado conjunto de datos. 
+Los operadores lógicos son muy usados para **extraer** información que **cumple con ciertas condiciones** de determinado conjunto de datos. 
 
 --
 
@@ -1309,6 +1361,7 @@ También podemos modificar elementos específicos de un vector.
 
 
 ```r
+# primero creamos un vector
 x &lt;- 1:10
 ```
 
@@ -1358,11 +1411,11 @@ Existen estructuras de datos más complejas que los vectores.
 
 --
 
-.pur[Es el formato más común al que nos enfrentamos diariamente] en hojas de cálculo, programas como SPSS, Stata, etc.
+.pur[Es el formato más común al que nos enfrentamos diariamente] en hojas de cálculo, programas como Excel, SPSS, Stata, etc.
 
 --
 
-Podemos entender un data frame como un .pur[conjunto de vectores que tienen la misma longitud] y que conforman una tabla (i.e. toman forma rectangular)
+Podemos entender un data frame como un .pur[conjunto de vectores que tienen la misma longitud] y que conforman una tabla (i.e. toman forma rectangular).
 
 --
 
@@ -1399,7 +1452,7 @@ background-position: 100% 0%
 
 --
 
-medium-par-red[No pueden convivir tipos de datos diferentes dentro de una matriz.]
+.medium-par-red[No pueden convivir tipos de datos diferentes dentro de una matriz.]
 
 
 ```r
@@ -1470,7 +1523,7 @@ background-position: 100% 0%
 
 --
 
-Son usados para representar variables categóricas, ordinales o no.
+Son usados para representar **variables categóricas**, ordinales o no.
 
 --
 
@@ -1494,7 +1547,7 @@ ocupacion
 
 --
 
-En las sesiones posteriores veremos que son muy importantes, sobre todo cuando queremos visualizar nuestros datos 📊📈.
+En las sesiones posteriores veremos que son muy importantes, sobre todo cuando queremos .pur[visualizar] nuestros datos 📊📈.
 
 ---
 
@@ -1512,7 +1565,7 @@ Finalmente, este tipo de datos es similar a las matrices, sin embargo, pueden te
 
 --
 
-De hecho, un *array* de dos dimensiones es lo mismo que una matriz.
+De hecho, .medium-par-red[un *array* de dos dimensiones es lo mismo que una matriz.]
 
 --
 
