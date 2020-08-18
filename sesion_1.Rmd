@@ -176,16 +176,16 @@ background-position: 100% 0%
 
     - ¿Qué es R y por qué usarlo?
     - La interfaz de R Studio
+    - Tipos de datos y operaciones básicas
     - Exploración y manipulación básica de un data frame
-    - Cargar datos desde distintos formatos a R
 
 --
 
 **Sesión 2:** Procesamiento de bases de datos (1)
 
+    - Cargar datos desde distintos formatos a R
     - Encadenamiento de instrucciones: manejo de pipes (%>%)
     - Transformación de datos (creación y edición de variables)
-    - Estadística descriptiva (medidas de dispersión y tendencia central)
     - Agregación de unidades con group_by
 
 --
@@ -796,7 +796,7 @@ Es el objeto más básico en **R**.
 
 --
 
-Un vector es una forma de **almacenar datos** que permiten contener **una serie de valores del mismo tipo**.
+Un vector es una forma de **almacenar datos** que permite contener **una serie de valores del mismo tipo**.
 
 --
 
@@ -808,26 +808,186 @@ Veamos algunos ejemplos.
 
 --
 
-```{r, eval = F}
-animales <- c("gato", "perro", "gallina")
+```{r, eval = T, include=F}
+nombres <- c("jacqueline", "miguel","lorena", "luis")
 a <- c(1, 5, 6, 9:12)
 b <- c(1, 2, 3, "gato")
 ```
 
 --
 
-La función "c" (combine) permite unir valores en un vector.
+La función "c" (combine) permite unir valores u objetos.
 
 --
 
-¿De qué tipo son los vectores creados? ¿
+- ¿cuántos elementos contiene el vector "a"?
 
 
+- ¿De qué tipo son los vectores creados?
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Tipos de datos en R
+
+--
+
+Existen 5 tipos de vectores en R:
+
+--
+
+```{r}
+character <- c("gato", "perro")
+numeric <- c(8, 15.9) # reales o decimales
+integer <-  c(2L, 4L) # L indica que son enteros
+logical <- c(TRUE, FALSE, TRUE) 
+complex <- 3 + 4i # complejos
+```
+
+--
+
+Podemos consultar cuál es el tipo de vector con `class()` o `typeof()`
 
 
+```{r}
+class(a)
+typeof(b)
+```
+
+.medium-par[Que los vectores sea antómicos ⚛️ significa .medium-par-red[solo pueden contener un tipo de datos.]]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Tipos de datos en R
+
+## Creando vectores
+
+--
+
+Vimos que es posible crear vectores con la función "c".
+
+```{r}
+x <-c(1,2,3,4,5)
+```
+
+--
+
+Una secuencia sencilla también podemos crearla de la siguiente manera.
+
+```{r}
+y <- 1:20
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Tipos de datos en R
+
+## Creando vectores
+
+Sin embargo, existen funciones más poderosas para crear vectores.
+
+--
+
+Una de ellas es `seq()`(*sequence generation*).
+
+--
+
+Recibe 4 argumentos: *from*, *to*, *length* y *by*.
+
+--
+
+.medium-par-red[¿Cómo crearían un vector que vaya del 1 al 5 y que avance en intervalos de 0.5?]
+
+--
+
+```{r, eval = F}
+a <- seq(from = ¿?, to = ¿?, by = ¿?)
+```
+
+.medium-par-red[¿Cómo crearían un vector que vaya del 1 al 10 y contenga 100 valores?]
 
 
+```{r, eval = F}
+b <- seq(from = ¿?, to = ¿?, length = ¿?)
+```
 
+--
+
+Sin especificarlo, **R** genera intervalos de igual tamaño.
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Tipos de datos en R
+
+## Operaciones matemáticas
+
+--
+
+R ofrece los siguientes operadores matemáticos
+
+--
+
+```{r, eval = F}
+x + y   # suma
+x - y   # resta
+x * y   # multiplicación
+x / y   # división
+x ^ y   # exponenciación
+x %% y  # modulo división (resto) 10 %% 3 = 1 
+x %/% y # división por enteros: 10 %/% 3 = 3
+```
+
+--
+
+Generalmente utilizamos los operadores básicos (+, -, *, /).
+
+--
+
+Sin embargo, el operador **módulo (%%)** es muy útil para programar.
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Tipos de datos en R
+
+## Indexación
+
+--
+
+En general, cuando trabajamos con datos ordenados **nos interesa seleccionar uno o algunos elementos en particular**.
+
+--
+
+```{r}
+bandas_cl <- c("Los prisioneros", "Los Bunkers", 
+               "Los Ángeles Negros") 
+bandas_arg <- c("Pescado rabioso", "Spinetta Jade", 
+                "Virus", "Soda Stereo")
+bandas <- c(bandas_cl, bandas_arg) # acá uno los dos vectores
+bandas
+```
+
+--
+
+Al imprimir el vector bandas vemos que aparece un número entre [ ]
 
 
 ---
@@ -836,18 +996,93 @@ background-image: url("imagenes/fondo2.PNG")
 background-size: contain;
 background-position: 100% 0%
 
-# Funciones en R
+# Tipos de datos en R
+
+## Indexación
+
+--
+
+Este número indica un **índice o posición** de los elementos al interior de un vector.
+
+--
+
+```{r}
+bandas[5] # nos entrega el 5to elemento
+```
+
+--
+
+La **indexación es la selección de subconjuntos de datos de un vector**. .pur[[]] es un operador de selección.
+
+--
+
+Tenemos .pur[diferentes alternativas para indicar posición]. Veamos ejemplos:
+
+--
 
 
-Antes de importar recordar setear ruta de trabajo
+```{r}
+# primero creamos vectores
+numeros <- 20:40 
+nombres <-  c("jacqueline", "miguel","lorena", "luis")
+```
+
+--
+
+- Con un operador lógico 
+
+```{r}
+numeros[numeros>30]
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Tipos de datos en R
+
+## Indexación
+
+--
+
+- Con un vector numérico
+
+```{r}
+numeros[8]
+nombres[c(1,2)]
+```
+--
+
+- Con selección negativa (ej. vector[-1])
+
+```{r}
+nombres[-2]
+nombres[c(-3,-4)]
+```
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+--
+
+# Mini-ejercicio 2
 
 
+1. Crea un vector numérico del 1 al 30 y asígnalo a un objeto (ponle el nombre que quieras).
 
+2. Selecciona el valor de la quinta posición.
 
+3. Selecciona los valores mayores a 13.
 
+4. Crea un segundo objeto a partir del primero que no contenga el último valor (30).
 
+5. Crea un tercer vector que vaya del 0 al 30, pero .pur[que contenga solo los números pares].
 
-
+.center[.medium-par-red[Recuerda que para crear objetos o asignar valores debes usar ** <-**]]
 
 
 ---
@@ -856,8 +1091,282 @@ background-image: url("imagenes/fondo2.PNG")
 background-size: contain;
 background-position: 100% 0%
 
-Antes de importar recordar setear ruta de trabajo
+# Operadores lógicos
 
+.medium.par[Los **operadores lógicos** son .medium-par-red[muy] importantes para la programación.]
+
+--
+
+**R** cuenta con operadores de comparación binaria.
+
+```{r, echo=TRUE, eval=FALSE}
+x < y    # menor que
+x > y    # mayor que
+x <= y   # menor o igual que
+x >= y   # mayor o igual que
+x == y   # igual a 
+x != y   # distinto a
+```
+
+--
+
+👀: Nota que `==` permite comparar si dos valores son iguales. Ten cuidado de **NO** usar `=` que es interpretado como un operador de asignación (es como usar **<-**).
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Operadores lógicos
+
+--
+
+Algunos ejemplos con números:
+
+```{r, echo=TRUE, eval=FALSE}
+x <- c(1,2,5)
+y <- c(4,4,3)
+x == y
+#> [1] FALSE FALSE FALSE
+x != y
+#> [1] TRUE TRUE TRUE
+x < y
+#> [1]  TRUE  TRUE FALSE
+```
+
+--
+
+Ahora con caracteres:
+
+```{r, echo=TRUE, eval=FALSE}
+a <- c("izzy", "jazz", "tyler")
+b <- c("devon", "vanessa", "hilary")
+a < b   # orden alfabético
+#> [1] FALSE  TRUE FALSE
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Operadores lógicos
+
+--
+
+Comparaciones en **R** tienen como resultado valores lógicos: `TRUE`, `FALSE` o `NA` (*not available*). 
+
+--
+
+Tal como en los operadores aritméticos, las comparaciones lógicas con un vector son aplicadas elemento a elemento y su resultado es un vector de valores de verdad (vector lógico).
+
+--
+
+Los operadores lógicos son muy usados para extraer información que cumple con ciertas condiciones de determinado conjunto de datos. 
+
+--
+
+.medium-par[Otros operadores muy importantes son "`|`" (o) y "`&`" (y).]
+
+--
+
+**Revisaremos estos operadores más adelante.**
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Operadores lógicos
+
+--
+
+También podemos modificar elementos específicos de un vector.
+
+--
+
+```{r, echo=TRUE}
+x <- 1:10
+```
+
+--
+
+Podemos hacerlo indicando una posición 
+
+```{r, echo=TRUE}
+x[5] <- 0
+x
+```
+
+--
+
+O también podemos seleccionar los elementos a modificar con **operadores lógicos**.
+
+--
+
+.medium-par-red[¿Qué creen que hace esta sentencia?]
+
+```{r}
+x <- 1:10
+x[x > 5] <- x[x > 5] + 5
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Otros tipos de datos en R
+
+--
+
+Existen estructuras de datos más complejas que los vectores.
+
+--
+
+## data frames
+
+--
+
+.pur[Es el formato más común al que nos enfrentamos diariamente] en hojas de cálculo, programas como SPSS, Stata, etc.
+
+--
+
+Podemos entender un data frame como un .pur[conjunto de vectores que tienen la misma longitud] y que conforman una tabla (i.e. toman forma rectangular)
+
+--
+
+```{r}
+curso <- data.frame(nombre = c("Klaus", "Juan", "Ignacio"),
+                    notas = c(7, 7, 1))
+curso
+```
+
+.medium-par-red[La mayor parte de este curso se enfocará en cómo trabajar con este tipo de objetos en R.]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Otros tipos de datos en R
+
+
+## Matrices
+
+--
+
+**Pueden ser entendidos como una extensión de los vectores**, pero con dimensión de filas y columnas.
+
+--
+
+medium-par-red[No pueden convivir tipos de datos diferentes dentro de una matriz.]
+
+```{r matrix, include=TRUE}
+curso <- matrix(c("Klaus", "Juan", "ignacio", 7, 7, 1),
+                nrow = 3,
+                ncol = 2)
+colnames(curso) <- c("nombre", "nota")
+
+curso
+```
+
+--
+
+Si se fijan, los números fueron forzados a ser *character* ("1").
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Otros tipos de datos en R
+
+## Listas
+
+--
+
+Una lista es una estructura que **puede contener diferentes tipos de datos**, incluso listas.
+
+--
+
+A veces se les llama vectores genéricos, dado que soportan cualquier tipo de formato.
+
+--
+
+```{r lista, echo=TRUE, eval=FALSE}
+a <- c(1,2,3,4,5)
+b <- c("rojo", "verde")
+c <-  data.frame(nom = "Klaus", "Juan",
+                          nota = 7, 7)
+
+lista1 <- list(a,b,c)
+```
+
+--
+
+.pur[Esta estructura es más compleja de entender], pero en la parte II de este ciclo de capacitaciones verán que son .pur[muy útiles].
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Otros tipos de datos en R
+
+
+## Factores
+
+--
+
+Son usados para representar variables categóricas, ordinales o no.
+
+--
+
+Parecen vectores de caracteres y a veces se comportan de esa manera (porque **permiten guardar etiquetas**), pero realmente son almacenados como *integers* (enteros, .pur[que son más livianos para almacenar]).
+
+--
+
+```{r factores, echo=TRUE}
+ocupacion <- factor(x = c(1,2,3,1,2,1,3,4,1,5), 
+       labels = c("profesor", "musico", "doctora",
+                  "taxista", "pescador"))
+ocupacion
+```
+
+--
+
+En las sesiones posteriores veremos que son muy importantes, sobre todo cuando queremos visualizar nuestros datos 📊📈.
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Otros tipos de datos en R
+
+## *Arrays*
+
+--
+
+Finalmente, este tipo de datos es similar a las matrices, sin embargo, pueden tener más de dos dimensiones.
+
+--
+
+De hecho, un *array* de dos dimensiones es lo mismo que una matriz.
+
+--
+
+**No las usaremos para nada en el curso** (pero pueden consultar más sobre ellas con `help(array)` 👀)
 
 
 ---
