@@ -136,7 +136,7 @@ background-position: 100% 0%
 
 --
 
-- Si van surgiendo dudas, pueden consultar **levantando su mano** (Teams) durante la clase.
+- Si van surgiendo dudas, pueden consultar durante la clase.
 
 --
 
@@ -155,7 +155,7 @@ background-position: 100% 0%
 
 # Contenidos de la capacitación
 
-.medium-par[**PARTE I: HERRAMIENTAS BÁSICAS**]
+.medium-par[**Parte I: Herramientas básicas**]
 
 --
 
@@ -163,6 +163,7 @@ background-position: 100% 0%
 
     - ¿Qué es R y por qué usarlo?
     - La interfaz de R Studio
+    - Tipos de datos y operaciones básicas en R
     - Exploración y manipulación básica de un data frame
     - Cargar datos desde distintos formatos a R
 
@@ -180,7 +181,7 @@ background-position: 100% 0%
 **Sesión 3:** Procesamiento de bases de datos (2)
 
     - Unión de bases de datos (joins, binds)
-    - Manejo de variables de tiempo (fechas, horas)
+    - Manejo de variables de tiempo (fechas)
     - Manejo de variables factor
 
 ---
@@ -210,7 +211,7 @@ background-position: 100% 0%
 
 --
 
-.medium-par[**PARTE II: APLICANDO LO APRENDIDO**]
+.medium-par[**Parte II: Aplicaciones útiles para negocio**]
 
 **Sesión 6:** Validación de datos
 
@@ -311,7 +312,7 @@ background-position: 100% 0%
 
 --
 
-**R** es gratis, su código es abierto y se encuentra disponible en la mayoría de las plataformas (Windows, Mac OS, Linux).
+**R** es gratis, su código es abierto y se encuentra disponible para los sistemas operativos más populares (Windows, Mac OS, Linux).
 
 --
 
@@ -347,7 +348,7 @@ En Chile la comunidad de R se ha organizado en torno al [Grupo de Usuarios de R 
 
 --
 
-Anaualmente se realizan conferencias de a nivel mundial [UseR!](https://user2020.r-project.org/) y a nivel latinoamericano [Latin-R](http://latin-r.com).
+Anualmente se realizan conferencias de a nivel mundial [UseR!](https://user2020.r-project.org/) y a nivel latinoamericano [Latin-R](http://latin-r.com).
 
 --
 
@@ -355,7 +356,7 @@ Cuenta con **poderosas herramientas para comunicar resultados**. Varios paquetes
 
 --
 
-Cuenta con entorno de desarrollo interactivo diseñado especialmente para el análisis de datos y la programación estadística (**RStudio**).
+Cuenta con un entorno de desarrollo interactivo diseñado especialmente para el análisis de datos y la programación estadística (**RStudio**).
 
 --
 
@@ -387,7 +388,7 @@ background-position: 100% 0%
 
 --
 
-.medium-par[**Boletín índice de Precios al Productor:**]
+.medium-par[**Boletín índice de Precios al Productor (IPP):**]
 
 --
 
@@ -437,9 +438,23 @@ class: center, middle
 .linea-inferior[]
 
 
-.big-par[Ahora abramos RStudio]
+.big-par[Ahora exploremos la interfaz de RStudio]
 
 &lt;img src="https://media0.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.webp?cid=ecf05e4764sdgx6wh23uc6xzgr9hh8wm3mjv5c6lr2bqyejp&amp;rid=giphy.webp" width="300" /&gt;
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# La interfaz de R
+
+.center[![](imagenes/interfaz_rstudio.PNG)]
+
+--
+
+.center[.medium-par[Al abrir RStudio debieran ver algo así.]]
 
 ---
 
@@ -459,7 +474,7 @@ background-position: 100% 0%
 
 --
 
-- .medium-par[Usando archivos *script* (texto plano que contiene nuestro código).]
+- .medium-par[Usando archivos *script* (el editor de texto que contiene nuestro código).]
 
 ---
 
@@ -479,7 +494,7 @@ En **RStudio** corresponde al panel ubicado abajo a la izquierda.
 
 --
 
-El símbolo `&gt;` significa que **R** está listo para que le entreguemos una instrucción a ejecutar.
+El símbolo "`&gt;`" significa que **R** está listo para que le entreguemos una instrucción a ejecutar.
 
 --
 
@@ -491,11 +506,19 @@ Los comandos que se escriban aquí no serán grabados para un nuevo inicio de se
 
 --
 
+Generalmente se usa la consola para realizar **breves exploraciones** de datos.
+
+--
+
 El código escrito en consola se ejecuta con la tecla **Enter**.
   
 --
 
-- Sin embargo, **una práctica habitual y recomendada** es guardar rutinas completas en archivos *script*.
+Para recuperar una instrucción prevía se usa ⬆️  /  Para limpiar 🧹 la consola puedo usar **Ctrl + l**.
+
+--
+
+.medium-par[Sin embargo, **una práctica habitual y recomendada** es guardar rutinas completas en archivos *script*.]
   
 ---
 
@@ -513,19 +536,31 @@ Es común que una tarea la queramos repetir más de una vez.
 
 --
 
-Esta tarea muchas veces involucra un conjunto de tareas, por lo que es poco eficiente utilizar la consola para realizarlas.
+Esta tarea muchas veces involucra un conjunto de tareas, por lo que **es poco eficiente utilizar la consola** para realizarlas.
 
 --
 
-Resulta conveniente guardar múltiples instrucciones en un archivo de texto (*script*) que luego nos permita volver a ejecutar estas tareas.
+Resulta conveniente **guardar múltiples instrucciones en un archivo** de texto (*script*) que luego nos permita volver a ejecutar estas tareas.
 
 --
 
-Además resulta mucho más fácil compartir nuestro trabajo de esta manera.
+Además resulta mucho más **fácil compartir nuestro trabajo** de esta manera.
+
+--
+
+.medium-par[Tips:]
 
 --
 
 Para ejecutar el código en *script* puedes utilizar sl *shortcut* **Ctrl + Enter**.
+
+--
+
+Para hacer comentarios en *script* debes anteponer un numeral ("#"). **Comentar el código es una buena práctica.**
+
+--
+
+Con "#" también puedes **silenciar** líneas de código. Puedes hacerlo masivamente con **Ctrl + Shift + c**.
 
 ---
 
@@ -541,7 +576,7 @@ background-position: 100% 0%
 
 --
 
-Pueden probarlo ustedes mismos en su consola o script
+Pruébenlo ustedes mismos en su consola o script.
 
 
 ```r
@@ -553,11 +588,80 @@ Pueden probarlo ustedes mismos en su consola o script
 ```
 
 
+```r
+6 * 8
+```
+
+```
+## [1] 48
+```
 
 
+```r
+(4 + 5) + (6 * 8)
+```
+
+```
+## [1] 57
+```
+
+--
+
+Se pueden hacer cosas mucho más interesantes. Para eso es útil **asignar valores a objetos**
+
+--
+
+Para esto se utiliza el operador "**&lt;-**" (shortcut **"Alt + -**") 
+
+--
 
 
+```r
+x &lt;- 5
+```
 
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Primeras operaciones en R
+
+--
+
+Entonces, podríamos hacer cosas como esta.
+
+--
+
+
+```r
+a &lt;- 20
+b &lt;- 5
+
+a + b
+```
+
+```
+## [1] 25
+```
+
+--
+
+El signo "**^**" representa al exponencial.
+
+
+```r
+a + b ^ 2
+```
+
+```
+## [1] 45
+```
+
+--
+
+Entonces, podemos hacer operaciones sobre los valores almacenados, a través de estos objetos abstractos (a y b).
 
 
 ---
@@ -566,8 +670,188 @@ background-image: url("imagenes/fondo2.PNG")
 background-size: contain;
 background-position: 100% 0%
 
-Antes de importar recordar setear ruta de trabajo
+# Mini- ejercicio 1
 
+--
+
+1- ¿Qué sucede si cambiamos el valor de "a" por 20 y luego realizamos la última operación?
+
+--
+
+2- ¿Es posible asignar el resultado a una nueva variable "c"? ¿Cómo lo harías?
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Funciones en R
+
+--
+
+La mayor parte del tiempo, en cualquier *software*, usamnos **funciones** integradas.
+
+--
+
+Pueden ser entendidas como *scripts* que funcionan "tras bambalinas": **un conjunto de instrucciones que permiten automatizar rutinas largas y/o complicadas**.
+
+--
+
+O también operaciones sencillas. Por ejemplo:
+
+--
+
+
+```r
+3 + 3
+```
+
+```
+## [1] 6
+```
+
+--
+
+Es lo mismo que utilizar la función `sum()`
+
+
+```r
+sum(3,3)
+```
+
+```
+## [1] 6
+```
+
+--
+
+Pero `sum()` es una función muy versatil y más potente.
+
+
+```r
+x &lt;- c(1,3,5,6,8,9,18,20)
+sum(x)
+```
+
+```
+## [1] 70
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Funciones en R
+
+## R contiene variadas funciones matemáticas
+
+
+```r
+sqrt(4) # raíz cuadrada
+```
+
+```
+## [1] 2
+```
+
+
+```r
+round(9.556789) # aproximar
+```
+
+```
+## [1] 10
+```
+
+
+
+```r
+floor(9.556789) # truncar
+```
+
+```
+## [1] 9
+```
+
+--
+
+**Las funciones tienen argumentos**, y podemos conocerlos con preguntando con `args()`
+
+
+```r
+args(round)
+```
+
+```
+## function (x, digits = 0) 
+## NULL
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Funciones en R
+
+--
+
+El argumento "digits" me permite indicarle a round cuántos decimales quiero. **Pero si no le digo asume que es cero**.
+
+
+```r
+round(9.556789, digits = 2)
+```
+
+```
+## [1] 9.56
+```
+
+--
+
+En este caso también puedo indicarlo de una manera más sencilla
+
+--
+
+
+```r
+round(9.556789, 2)
+```
+
+```
+## [1] 9.56
+```
+--
+
+Como no hay ambigüedad, R lo entiende.
+
+--
+
+Para obtener ayuda sobre una función lo hacemos de la siguiente forma:
+
+
+```r
+?round
+# o
+help(round) # help también es una función
+```
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Funciones en R
+
+
+Antes de importar recordar setear ruta de trabajo
 
 
 ---
@@ -580,6 +864,8 @@ background-position: 100% 0%
 
 .medium-par[Nada de esto sería posible sin:]
 
+- [R for Data Science, de Hadley Wickham](https://r4ds.had.co.nz/)
+
 - [Advanced R, de Hadley Wickham](http://adv-r.had.co.nz/Introduction.html)
 
 - [Data wrangling, exploration, and analysis with R, de Jenny Bryan](http://stat545.com/index.html)
@@ -587,6 +873,10 @@ background-position: 100% 0%
 - [Introduction to R, de Data Carpentry](https://datacarpentry.org/R-genomics/01-intro-to-R.html#functions)
 
 - [Xaringan: Presentation Ninja, de Yihui Xie](https://github.com/yihui/xaringan). Para generar esta presentación con la plantilla ninja ⚔
+
+.medium-par[R for Data Science tiene una traducción al español realizada por la comunidad hispana de R:]
+
+- [R para ciencia de datos, de Hadley Wickham](https://es.r4ds.hadley.nz/)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
