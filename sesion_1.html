@@ -22,6 +22,8 @@ class: center, middle
 
 ## Capacitación en R y herramientas de productividad
 
+## Proyecto Estratégico Servicios Compartidos para la Producción Estadística
+
 ## Introducción y herramientas de exploración de datos
 
 ### Agosto 2020
@@ -959,7 +961,7 @@ typeof(b)
 
 --
 
-.medium-par[Que los vectores sea antómicos ⚛️ significa que .medium-par-red[solo pueden contener un tipo de datos.]]
+.medium-par[Que los vectores sea atómicos ⚛️ significa que .medium-par-red[solo pueden contener un tipo de datos.]]
 
 ---
 
@@ -1456,7 +1458,7 @@ background-position: 100% 0%
 
 
 ```r
-curso &lt;- matrix(c("Klaus", "Juan", "ignacio", 7, 7, 1),
+curso &lt;- matrix(c("Klaus", "Juan", "Ignacio", 7, 7, 1),
                 nrow = 3,
                 ncol = 2)
 colnames(curso) &lt;- c("nombre", "nota")
@@ -1468,7 +1470,7 @@ curso
 ##      nombre    nota
 ## [1,] "Klaus"   "7" 
 ## [2,] "Juan"    "7" 
-## [3,] "ignacio" "1"
+## [3,] "Ignacio" "1"
 ```
 
 --
@@ -1571,6 +1573,423 @@ De hecho, .medium-par-red[un *array* de dos dimensiones es lo mismo que una matr
 
 **No las usaremos para nada en el curso** (pero pueden consultar más sobre ellas con `help(array)` 👀)
 
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Recapitulando
+
+--
+
+.medium.par[Hasta ahora hemos visto:]
+
+--
+
+- Qué es R y por qué usarlo
+
+--
+
+- Cosas que podemos hacer con R
+
+--
+
+- Interfaz de RStudio
+
+--
+
+- Primeras operaciones con R (funciones básicas, asignaciones, ...)
+
+--
+
+- Tipos de datos en R (vectores, matrices, *data frames*, ...) y...
+
+--
+
+- Operadores lógicos (&gt;, &lt;, ==, ...)
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Volviendo a los *data frames*
+
+--
+
+Como mencionamos anteriormente, los *data frames* **son la estructura de datos a que nos enfrentamos más a menudo.**
+
+--
+
+Para explorar y manipular *data frames* utilizaremos el paquete `guaguas` de **Riva Quiroga (chilena).**
+
+--
+
+![](imagenes/guaguas.PNG)
+
+--
+
+Instalamos el paquete (.pur[nuestro primer paquete 😍])
+
+--
+
+
+```r
+install.packages("guaguas")
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Volviendo a los *data frames*
+
+--
+
+Y luego lo cargamos en nuestra sesión (.pur[no basta con instalarlo para usarlo]).
+
+--
+
+
+```r
+library(guaguas)
+```
+
+--
+
+Es una base de .medium-par-red[alto interés sociológico]. 🧐
+
+--
+
+&lt;img src="sesion_1_files/figure-html/unnamed-chunk-40-1.png" width="700px" height="400px" style="display: block; margin: auto;" /&gt;
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Volviendo a los *data frames*
+
+--
+
+&lt;img src="sesion_1_files/figure-html/unnamed-chunk-41-1.png" width="700px" height="400px" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Exploración *data frames*
+
+--
+
+(fuente de paquete y gráficos:[GitHub de Riva Quiroga](https://github.com/rivaquiroga/guaguas))
+
+
+--
+
+R cuenta con algunas funciones *base* para la **exploración**.
+
+--
+
+Primero carguemos la base en nuestro **ambiente de trabajo**.
+
+--
+
+
+```r
+data &lt;- guaguas
+```
+
+--
+
+Dado que la base viene con el paquete no es necesario cargarla, pero es mejor acostumbrarse de esta manera.
+
+--
+
+.medium-par-red[¿Qué información nos aportan estas funciones sobre nuestra base?]
+
+--
+
+
+
+```r
+class(data)
+is.data.frame(data)
+dim(data)
+str(data)
+head(data)
+names(data)
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Exploración *data frames*
+
+--
+
+También usando lenguaje *base* podemos pedir tablas de resumen.
+
+--
+
+.medium-par-red[Para eso debemos utilizar la función `table()` y el operador "$", que vincula a una variable con un objeto.]
+
+--
+
+
+```r
+table(data$anio)
+table(data$nombre)
+```
+
+--
+
+También podemos pedir la proporción, aplicando aplicando `prop.table()` sobre `table()`.
+
+--
+
+
+```r
+prop.table(table(data$sexo))
+```
+
+```
+## 
+##         F         M 
+## 0.5873115 0.4126885
+```
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Seleccionar filas y columnas 
+
+--
+
+Es similar a la seleción de elementos en un vector.
+
+--
+
+## Seleccionar columnas
+
+--
+
+
+
+
+```r
+dim(data_2)
+```
+
+```
+## [1] 84565     1
+```
+
+```r
+dim(data_3)
+```
+
+```
+## [1] 84565     4
+```
+
+--
+
+También podemos seleccionar por nombre de columna.
+
+
+```r
+data_4 &lt;- data[,c("anio", "nombre", "n")]
+names(data_4)
+```
+
+```
+## [1] "anio"   "nombre" "n"
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Seleccionar filas y columnas 
+
+--
+
+## Seleccionar filas
+
+--
+
+Se pueden seleccionar filas de distintas maneras.
+
+--
+
+
+```r
+data_5 &lt;- data[data$anio==2019,]
+table(data_5$anio)
+```
+
+```
+## 
+## 2019 
+##  948
+```
+
+--
+
+
+```r
+data_6 &lt;- data[data$anio &gt; 2010,]
+table(data_6$anio)
+```
+
+```
+## 
+## 2011 2012 2013 2014 2015 2016 2017 2018 2019 
+##  998  982  981  983  985  955  924  955  948
+```
+
+--
+
+Por supuesto, también se pueden seleccionar filas y columnas a la vez 🥳.
+
+--
+
+.medium-par-red[¿Cómo lo harían?] Hagamos algunos ejercicios para finalizar.
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Ordenar vectores y *data frames*
+
+--
+
+Antes vamos a instalar una librería más.
+
+--
+
+Esta librería la vamos a utilizar .medium-par-red[muchísimo] en las próximas sesiones.
+
+--
+
+
+```r
+install.packages("tidyverse")
+```
+
+--
+
+Cargamos la librería.
+
+--
+
+
+```r
+library(tidyverse)
+```
+
+--
+
+En esta sesión vamos a conocer una función llamada `arrange()` que está contenida en `tidyverse`.
+
+--
+
+`arrange()` cumple la función de .medium-par-red[ordenar] vectores o *data frames* **en función de una o más variables.**
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Ordenar vectores y *data frames*
+
+--
+
+.medium-par[Funciona así:]
+
+--
+
+Asi podemos ordenar el *data frame* por `anio`. 
+
+--
+
+
+```r
+arrange(data, anio)
+```
+
+Por defecto lo hace de forma .medium-par-red[ascendente]. 
+
+--
+
+Le podemos pedir que lo haga en forma .medium-par-red[descendente]. 
+
+--
+
+Además **puede ordenarse por más de una variable**. 
+
+--
+
+
+```r
+arrange(data, desc(anio, n))
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+#  Mini- ejercicio 3 &lt;strike&gt;(yfinal)&lt;/strike&gt; 
+
+--
+
+Con las herramientas para **seleccionar, filtrar y ordenar**, puedes hacerlo de .pur[distintas] maneras.
+
+--
+
+1. ¿Cuántas personas .pur[con tu nombre] nacieron .pur[el mismo año que tú]?
+
+--
+
+**pista:** R es *case sensitive*, y los nombes tienen su primera letra mayúscula (p.e: "Camila").
+
+--
+
+2. ¿Cuál fue el nombre más usado el año que tú naciste?
+
+--
+
+
+3. .medium-par-red[bonus:] ¿Cuál es el nombre .medium-par-red[más usado] en Chile en todos los tiempos?
+
+.center[.big-par[🧠]]
+
+
+
 
 ---
 
@@ -1595,6 +2014,25 @@ background-position: 100% 0%
 .medium-par[R for Data Science tiene una traducción al español realizada por la comunidad hispana de R:]
 
 - [R para ciencia de datos, de Hadley Wickham](https://es.r4ds.hadley.nz/)
+
+---
+
+class: center, middle
+
+.linea-superior[]
+.linea-inferior[]
+
+
+&lt;img src="imagenes/logo_portada2.png" width="200" /&gt;
+
+
+## Capacitación en R y herramientas de productividad
+
+## Proyecto Estratégico Servicios Compartidos para la Producción Estadística
+
+## Introducción y herramientas de exploración de datos
+
+### Agosto 2020
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

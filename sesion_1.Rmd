@@ -25,6 +25,8 @@ class: center, middle
 
 ## Capacitación en R y herramientas de productividad
 
+## Proyecto Estratégico Servicios Compartidos para la Producción Estadística
+
 ## Introducción y herramientas de exploración de datos
 
 ### Agosto 2020
@@ -885,7 +887,7 @@ typeof(b)
 
 --
 
-.medium-par[Que los vectores sea antómicos ⚛️ significa que .medium-par-red[solo pueden contener un tipo de datos.]]
+.medium-par[Que los vectores sea atómicos ⚛️ significa que .medium-par-red[solo pueden contener un tipo de datos.]]
 
 ---
 
@@ -1312,7 +1314,7 @@ background-position: 100% 0%
 .medium-par-red[No pueden convivir tipos de datos diferentes dentro de una matriz.]
 
 ```{r matrix, include=TRUE}
-curso <- matrix(c("Klaus", "Juan", "ignacio", 7, 7, 1),
+curso <- matrix(c("Klaus", "Juan", "Ignacio", 7, 7, 1),
                 nrow = 3,
                 ncol = 2)
 colnames(curso) <- c("nombre", "nota")
@@ -1412,6 +1414,409 @@ De hecho, .medium-par-red[un *array* de dos dimensiones es lo mismo que una matr
 
 **No las usaremos para nada en el curso** (pero pueden consultar más sobre ellas con `help(array)` 👀)
 
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Recapitulando
+
+--
+
+.medium.par[Hasta ahora hemos visto:]
+
+--
+
+- Qué es R y por qué usarlo
+
+--
+
+- Cosas que podemos hacer con R
+
+--
+
+- Interfaz de RStudio
+
+--
+
+- Primeras operaciones con R (funciones básicas, asignaciones, ...)
+
+--
+
+- Tipos de datos en R (vectores, matrices, *data frames*, ...) y...
+
+--
+
+- Operadores lógicos (>, <, ==, ...)
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Volviendo a los *data frames*
+
+--
+
+Como mencionamos anteriormente, los *data frames* **son la estructura de datos a que nos enfrentamos más a menudo.**
+
+--
+
+Para explorar y manipular *data frames* utilizaremos el paquete `guaguas` de **Riva Quiroga (chilena).**
+
+--
+
+![](imagenes/guaguas.PNG)
+
+--
+
+Instalamos el paquete (.pur[nuestro primer paquete 😍])
+
+--
+
+```{r, eval = F}
+install.packages("guaguas")
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Volviendo a los *data frames*
+
+--
+
+Y luego lo cargamos en nuestra sesión (.pur[no basta con instalarlo para usarlo]).
+
+--
+
+```{r}
+library(guaguas)
+```
+
+--
+
+Es una base de .medium-par-red[alto interés sociológico]. 🧐
+
+--
+
+```{r, echo = F, warning=F, out.width = "700px", out.height="400px" , fig.align='center'}
+library(guaguas)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(forcats)
+library(hrbrthemes)
+library(ggthemes)
+
+guaguas %>% 
+  filter(nombre %in% c("Milenka", "Branco", "Salomé"), anio > 1980) %>% 
+  ggplot(aes(anio, n, color = nombre)) + 
+  geom_line() +
+  scale_color_colorblind() +
+  labs(x = "año", y = "total inscripciones",
+       title = "Inscripciones de nombres de personajes\n de 'Romané'") +
+  theme_ipsum()
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Volviendo a los *data frames*
+
+--
+
+```{r, echo = F, warning=F, out.width = "700px", out.height="400px" , fig.align='center'}
+guaguas %>% 
+  filter(nombre %in% c("Brian", "Kevin", "Bryan", "Brayan")) %>% 
+  ggplot(aes(anio, n, color = fct_reorder2(nombre, anio, n))) +
+  geom_line() +
+  scale_color_colorblind() +
+  labs(x = "año", y = "total inscripciones", color = "nombre",
+       title = "El efecto 'Backstreet Boys'") +
+  theme_ipsum()
+```
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Exploración *data frames*
+
+--
+
+(fuente de paquete y gráficos:[GitHub de Riva Quiroga](https://github.com/rivaquiroga/guaguas))
+
+
+--
+
+R cuenta con algunas funciones *base* para la **exploración**.
+
+--
+
+Primero carguemos la base en nuestro **ambiente de trabajo**.
+
+--
+
+```{r}
+data <- guaguas
+```
+
+--
+
+Dado que la base viene con el paquete no es necesario cargarla, pero es mejor acostumbrarse de esta manera.
+
+--
+
+.medium-par-red[¿Qué información nos aportan estas funciones sobre nuestra base?]
+
+--
+
+
+```{r, eval=F}
+class(data)
+is.data.frame(data)
+dim(data)
+str(data)
+head(data)
+names(data)
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Exploración *data frames*
+
+--
+
+También usando lenguaje *base* podemos pedir tablas de resumen.
+
+--
+
+.medium-par-red[Para eso debemos utilizar la función `table()` y el operador "$", que vincula a una variable con un objeto.]
+
+--
+
+```{r, eval=F}
+table(data$anio)
+table(data$nombre)
+```
+
+--
+
+También podemos pedir la proporción, aplicando aplicando `prop.table()` sobre `table()`.
+
+--
+
+```{r}
+prop.table(table(data$sexo))
+```
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Seleccionar filas y columnas 
+
+--
+
+Es similar a la seleción de elementos en un vector.
+
+--
+
+## Seleccionar columnas
+
+--
+
+```{r, eval = T, include=F}
+data_2 <- data[,1]
+data_3 <- data[,c(2:5)]
+```
+
+```{r}
+dim(data_2)
+dim(data_3)
+```
+
+--
+
+También podemos seleccionar por nombre de columna.
+
+```{r}
+data_4 <- data[,c("anio", "nombre", "n")]
+names(data_4)
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Seleccionar filas y columnas 
+
+--
+
+## Seleccionar filas
+
+--
+
+Se pueden seleccionar filas de distintas maneras.
+
+--
+
+```{r}
+data_5 <- data[data$anio==2019,]
+table(data_5$anio)
+```
+
+--
+
+```{r}
+data_6 <- data[data$anio > 2010,]
+table(data_6$anio)
+```
+
+--
+
+Por supuesto, también se pueden seleccionar filas y columnas a la vez 🥳.
+
+--
+
+.medium-par-red[¿Cómo lo harían?] Hagamos algunos ejercicios para finalizar.
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Ordenar vectores y *data frames*
+
+--
+
+Antes vamos a instalar una librería más.
+
+--
+
+Esta librería la vamos a utilizar .medium-par-red[muchísimo] en las próximas sesiones.
+
+--
+
+```{r, eval = F}
+install.packages("tidyverse")
+```
+
+--
+
+Cargamos la librería.
+
+--
+
+```{r, message = F}
+library(tidyverse)
+```
+
+--
+
+En esta sesión vamos a conocer una función llamada `arrange()` que está contenida en `tidyverse`.
+
+--
+
+`arrange()` cumple la función de .medium-par-red[ordenar] vectores o *data frames* **en función de una o más variables.**
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Ordenar vectores y *data frames*
+
+--
+
+.medium-par[Funciona así:]
+
+--
+
+Asi podemos ordenar el *data frame* por `anio`. 
+
+--
+
+```{r, eval=F}
+arrange(data, anio)
+```
+
+Por defecto lo hace de forma .medium-par-red[ascendente]. 
+
+--
+
+Le podemos pedir que lo haga en forma .medium-par-red[descendente]. 
+
+--
+
+Además **puede ordenarse por más de una variable**. 
+
+--
+
+```{r, eval = F}
+arrange(data, desc(anio, n))
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+#  Mini- ejercicio 3 <strike>(yfinal)</strike> 
+
+--
+
+Con las herramientas para **seleccionar, filtrar y ordenar**, puedes hacerlo de .pur[distintas] maneras.
+
+--
+
+1. ¿Cuántas personas .pur[con tu nombre] nacieron .pur[el mismo año que tú]?
+
+--
+
+**pista:** R es *case sensitive*, y los nombes tienen su primera letra mayúscula (p.e: "Camila").
+
+--
+
+2. ¿Cuál fue el nombre más usado el año que tú naciste?
+
+--
+
+
+3. .medium-par-red[bonus:] ¿Cuál es el nombre .medium-par-red[más usado] en Chile en todos los tiempos?
+
+.center[.big-par[🧠]]
+
+
+```{r, echo=F, include=F}
+data %>% group_by(nombre) %>% 
+  summarise(suma = sum(n)) %>%
+  arrange(desc(suma))
+```
 
 ---
 
@@ -1436,3 +1841,22 @@ background-position: 100% 0%
 .medium-par[R for Data Science tiene una traducción al español realizada por la comunidad hispana de R:]
 
 - [R para ciencia de datos, de Hadley Wickham](https://es.r4ds.hadley.nz/)
+
+---
+
+class: center, middle
+
+.linea-superior[]
+.linea-inferior[]
+
+
+<img src="imagenes/logo_portada2.png" width="200" />
+
+
+## Capacitación en R y herramientas de productividad
+
+## Proyecto Estratégico Servicios Compartidos para la Producción Estadística
+
+## Introducción y herramientas de exploración de datos
+
+### Agosto 2020
