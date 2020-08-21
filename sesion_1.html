@@ -4,7 +4,7 @@
     <title>Capacitación en R y herramientas de productividad</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
-    <meta name="date" content="2020-08-18" />
+    <meta name="date" content="2020-08-20" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -553,7 +553,11 @@ Para ejecutar el código en *script* puedes utilizar el *shortcut* .pur[Ctrl + E
 
 --
 
-El signo **#** también sirve para **silenciar** código sin tener que borrarlo. 
+El signo **#** también sirve para **silenciar** código sin tener que borrarlo.
+
+--
+
+👀 Con el *shortcut* .pur[Crtl +Shift + c] puedes **silenciar** varias lineas a la vez.
 
 ---
 
@@ -641,7 +645,7 @@ a + b
 
 --
 
-El signo "**^**" representa al exponencial.
+El signo "**^**" representa al exponencial. También se puede usar "******"
 
 
 ```r
@@ -1790,10 +1794,13 @@ Es similar a la seleción de elementos en un vector.
 
 --
 
+Podemos seleccionar columnas por su posición.
 
+--
 
 
 ```r
+data_2 &lt;- data[,1]
 dim(data_2)
 ```
 
@@ -1801,7 +1808,9 @@ dim(data_2)
 ## [1] 84565     1
 ```
 
+
 ```r
+data_3 &lt;- data[,c(2:5)]
 dim(data_3)
 ```
 

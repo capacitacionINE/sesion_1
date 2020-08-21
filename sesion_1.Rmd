@@ -566,7 +566,11 @@ Para ejecutar el código en *script* puedes utilizar el *shortcut* .pur[Ctrl + E
 
 --
 
-El signo **#** también sirve para **silenciar** código sin tener que borrarlo. 
+El signo **#** también sirve para **silenciar** código sin tener que borrarlo.
+
+--
+
+👀 Con el *shortcut* .pur[Crtl +Shift + c] puedes **silenciar** varias lineas a la vez.
 
 ---
 
@@ -633,7 +637,7 @@ a + b
 
 --
 
-El signo "**^**" representa al exponencial.
+El signo "**^**" representa al exponencial. También se puede usar "******"
 
 ```{r}
 a + b ^ 2
@@ -1645,13 +1649,17 @@ Es similar a la seleción de elementos en un vector.
 
 --
 
-```{r, eval = T, include=F}
+Podemos seleccionar columnas por su posición.
+
+--
+
+```{r}
 data_2 <- data[,1]
-data_3 <- data[,c(2:5)]
+dim(data_2)
 ```
 
 ```{r}
-dim(data_2)
+data_3 <- data[,c(2:5)]
 dim(data_3)
 ```
 
