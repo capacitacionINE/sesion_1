@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Capacitación en R y herramientas de productividad</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <meta name="date" content="2020-08-25" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Ejercicio para la 🏠
+
+--
+
+Vamos a trabajar con una base real de la **Encuesta Nacional Urbana de Seguridad Ciudadana (ENUSC)**, que levanta el INE año a año. Utilizaremos la última versión publicada (2019). 
+
+--
+
+Para la ENUSC, un **hogar victimizado** es aquel en el cual durante el último año **alguno de sus miembros fue víctima de al menos uno de los siguientes delitos:** 
+
+--
+
+- robo con intimidación (**A1_1_1**)
+- robo por sorpresa (**B1_1_1**)
+- robo con fuerza en la vivienda (**C1_1_1**)
+- hurto (**D1_1_1**)
+- lesiones (**E1_1_1**)
+- robo de vehículo (**G1_1_1**)
+- robo desde vehículo (**H1_1_1**)
+
+--
+
+Es decir, basta con tener un valor 1 (sí) en cualquiera de estas variables para que este hogar sea **victimizado**.
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Ejercicio para la 🏠
+
+## Ahora sí el ejercicio:
+
+En primer lugar debes Descargar la base de datos 2019 desde el [sitio de la ENUSC en la página del INE](https://www.ine.cl/estadisticas/sociales/seguridad-publica-y-justicia/seguridad-ciudadana). Puedes descargarla en formato .csv o en .sav (SPSS).  Crea o escoge un fichero en tu computador y descomprimer el archivo ahí.
+
+--
+
+1- Utilizando las funciones de **importación** aprendidas, carga la base de datos en tu entorno de trabajo de **R**.
+
+--
+
+2- ¿Cuántas observaciones y cuantas variables tiene la base?
+
+--
+
+3- La base es un poco **grande** y los nombres de las variables **poco intuitivos** 😵. Simplifiquemos la base:
+
+--
+
+    - filtrando solo a los informantes de la encuesta (Kish == 1).
+    
+    - seleccionando solo las variables que que usaremos (`enc_region` y   
+    las variables de victimización indicadas en la lámina anterior)
+    
+    - y renombrando estas variables para hacerlas más entendibles (sugerencia: region,
+    intimidacion, sorpresa, fuerza_viv, hurto, lesiones, de_vehiculo, desde_vehiculo) 
+    
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Ejercicio para la 🏠
+
+--
+    
+  Puedes hacer todo lo anterior en una sola instrucción usando `pipes` (`%&gt;%`). Te recomendamos guardarla en un objeto diferente, por ejemplo: `enusc_2`.
+  
+--
+
+ 4- ¿Cuántas observaciones y cuantas variables tiene tu base ahora?
+
+--
+
+ 5- Ahora, Genera una **variable dicotómica con valores 0 y 1** que indique, a partir de las variables de delitos, si un hogar ha sido víctima de al menos un delito. Crearla dentro de la base de datos y ponerle como nombre `VA_DC_2`.
+
+--
+
+ 6- Compara la victimización agregada que calculamos (`VA_DC_2`) con la que ya viene construida en la base original (`VA_DC`). ¿Son iguales?
+
+--
+
+ 7- Crear una tabla que muestre la victimización agregada para cada región (**Sin usar factores de expansión**).
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Ejercicio para la 🏠
+
+**hint 1** 👀:
+
+Puedes usar `ifelse()`, a través de mutate, para generar variables dicotómicas.
+
+
+```r
+enusc_2 &lt;- enusc_2 %&gt;% 
+  mutate(intimidacion = ifelse(intimidacion==1,1,0))
+```
+
+--
+
+**hint 2** 🕵:
+
+Existe una función llamada `rowSums()`. que te podría servir para sumar un total fila sobre un set de variables.
+
+--
+
+**hint 3** 🥸:
+
+Los valores `NA` son muy contagiosos. Puedes evitar su influencia usando el argumento `na.rm = TRUE`.
+
+
+.center[🤔🧠]
+
+
+---
+
+## solución
+
+
+1. cargar
+
+
+```r
+library(haven)
+enusc &lt;- read_sav("data/base-de-datos---xvi-enusc-2019-(sav).sav")
+```
+
+2. dimensiones
+
+
+```r
+dim(enusc)
+```
+
+```
+## [1] 76567   660
+```
+
+3. Transformación
+
+
+```r
+library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
+enusc_2 &lt;- enusc %&gt;% filter(Kish==1) %&gt;%
+  select(enc_region, VA_DC, A1_1_1, B1_1_1, C1_1_1, D1_1_1,
+         E1_1_1, G1_1_1, H1_1_1) %&gt;%
+  rename(region = enc_region, intimidacion = A1_1_1, 
+         sorpresa = B1_1_1, fuerza_viv = C1_1_1,
+         hurto = D1_1_1, lesiones = E1_1_1, 
+         de_vehiculo = G1_1_1, desde_vehiculo= H1_1_1)
+```
+
+4. nuevas dimensiones
+
+
+```r
+dim(enusc_2)
+```
+
+```
+## [1] 24465     9
+```
+5. dicotomizar variables
+
+
+```r
+enusc_2 &lt;- enusc_2 %&gt;% 
+  mutate(intimidacion = ifelse(intimidacion==1,1,0), 
+         sorpresa = ifelse(sorpresa==1,1,0), 
+         fuerza_viv = ifelse(fuerza_viv==1,1,0),
+         hurto = ifelse(hurto==1,1,0), 
+         lesiones = ifelse(lesiones==1,1,0),
+         de_vehiculo = ifelse(de_vehiculo==1,1,0),
+         desde_vehiculo = ifelse(desde_vehiculo==1,1,0))
+```
+
+calcular `VA_DC_2`. 
+
+
+```r
+enusc_2 &lt;- enusc_2 %&gt;% mutate(suma = rowSums(enusc_2[3:9],
+                                             na.rm = TRUE))
+enusc_2 &lt;- enusc_2 %&gt;% mutate(VA_DC_2 = if_else(suma&gt;=1, 1, 0))
+```
+
+6. ¿Sin iguales?
+
+
+```r
+sum(enusc_2$VA_DC!=enusc_2$VA_DC_2)
+```
+
+```
+## [1] 0
+```
+
+7. tabular victimización por región sin expandir
+
+```r
+enusc_2 %&gt;% group_by(region) %&gt;% 
+  summarise(vic_hog = mean(VA_DC_2))
+```
+
+```
+## `summarise()` ungrouping output (override with `.groups` argument)
+```
+
+```
+## Warning: `...` is not empty.
+## 
+## We detected these problematic arguments:
+## * `needs_dots`
+## 
+## These dots only exist to allow future extensions and should be empty.
+## Did you misspecify an argument?
+```
+
+```
+## # A tibble: 16 x 2
+##                                                      region vic_hog
+##                                                   &lt;dbl+lbl&gt;   &lt;dbl&gt;
+##  1  1 [Región de Tarapacá]                                   0.335 
+##  2  2 [Región de Antofagasta]                                0.178 
+##  3  3 [Región de Atacama]                                    0.177 
+##  4  4 [Región de Coquimbo]                                   0.190 
+##  5  5 [Región de Valparaíso]                                 0.207 
+##  6  6 [Región del Libertador General Bernardo O´Higgins]     0.206 
+##  7  7 [Región del Maule]                                     0.168 
+##  8  8 [Región del Bío-Bío]                                   0.203 
+##  9  9 [Región de la Araucanía]                               0.180 
+## 10 10 [Región de Los Lagos]                                  0.165 
+## 11 11 [Región de Aysén del General Carlos Ibáñez del Campo]  0.0762
+## 12 12 [Región de Magallanes y de la Antártica Chilena]       0.112 
+## 13 13 [Región Metropolitana de Santiago]                     0.267 
+## 14 14 [Región de Los Ríos]                                   0.159 
+## 15 15 [Región de Arica y Parinacota]                         0.290 
+## 16 16 [Región del Ñuble]                                     0.205
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -4,7 +4,7 @@
     <title>Capacitación en R y herramientas de productividad</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
-    <meta name="date" content="2020-08-20" />
+    <meta name="date" content="2020-11-23" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -106,10 +106,6 @@ background-position: 100% 0%
 
 --
 
-- Conozcan la **herramienta git** para el control de versiones en el desarrollo de proyectos de datos.
-
---
-
 - Conozcan **recomendaciones** que les permitan hacer **reproducibles** y **trazables** sus rutinas en R. 
 
 --
@@ -126,7 +122,7 @@ background-position: 100% 0%
 
 --
 
-- La capacitación se compone de **10 sesiones**.
+- La capacitación se compone de **9 sesiones**.
 
 --
 
@@ -157,7 +153,7 @@ background-position: 100% 0%
 
 # Contenidos de la capacitación
 
-.medium-par[**Parte I: Herramientas básicas**]
+##**Parte I: Herramientas básicas**
 
 --
 
@@ -170,12 +166,12 @@ background-position: 100% 0%
 
 --
 
-**Sesión 2:** Procesamiento de bases de datos (1)
+**Sesión 2:** Procesamiento de bases de datos (1) (en 2 partes)
 
     - Cargar datos desde distintos formatos a R
     - Encadenamiento de instrucciones: manejo de pipes (%&gt;%)
     - Transformación de datos (creación y edición de variables)
-    - Agregación de unidades con group_by
+    - Agregación de unidades con `group_by()`
 
 --
 
@@ -183,7 +179,6 @@ background-position: 100% 0%
 
     - Unión de bases de datos (joins, binds)
     - Manejo de variables de tiempo (fechas)
-    - Manejo de variables factor
 
 ---
 
@@ -210,45 +205,33 @@ background-position: 100% 0%
     - Creando mi primera función para mi trabajo diario
     - Buenas prácticas para la escritura de código
 
---
+---
 
-.medium-par[**Parte II: Aplicaciones para el negocio**]
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Contenidos de la capacitación
+
+
+##**Parte II: Aplicaciones para el negocio**
 
 **Sesión 6:** Validación de datos
 
     - Introducción al paquete validate
     - Creación de reglas de validación
     - Reporte de validación (usando funciones de validate)
-
----
-
-background-image: url("imagenes/fondo2.PNG")
-background-size: contain;
-background-position: 100% 0%
-
-# Contenidos de la capacitación
+    - Editando variables con dplyr
+        - Case_when
+        - Varias columnas a la vez (Mutate_*)
 
 --
 
 **Sesión 7:** Más sobre edición de datos
 
-    - Editando variables con dplyr
-        - Case_when
-        - Varias columnas a la vez (Mutate_*)
-    - Edición de variables de texto
-        - Grep, grepl y gsub
-        - Introducción a las expresiones regulares 
-
---
-
-**Sesión 8:** Trabajando con varias tablas simultáneamente
-
-    - Ciclo for
-    - Purrr (map, map_df)
-    - Leer un conjunto de archivos desde una carpeta (usando funcionales) 
-    - Editar un conjunto de tablas de manera eficiente 
-    - Generar tabulados para varias tablas 
-    - Generar reporte gráfico para varias tablas 
+    - Introducción al manejo de strings y `stringr`
+    - Expresiones regulares
+    - Aplicaciones para la exploración y edición de strings
 
 ---
 
@@ -259,30 +242,23 @@ background-position: 100% 0%
 # Contenidos de la capacitación
 
 --
-
-**Sesión 9:** Data.table para el manejo de grandes volúmenes de datos
-
-    - Es hora de abandonar dplyr (dplyr vs data.table) 
-    - Creación de un objeto data.table 
-    - Sintaxis básica de data.table 
-    - Consultas a la base de datos 
-    - Transformación de datos (edición y creación de variables) 
-
---
-
-**Sesión 10:**  En camino a la reproducibilidad
+&lt;br/&gt;
+**Sesión 8:**  En camino a la reproducibilidad
 
     - ¿Por qué es importante el trabajo reproducible? 
     - Introducción a Rmarkdown 
         - Instalación 
         - ¿Qué es RMarkdown? 
         - Creando mi primer reporte con RMarkdown 
-    - Introducción a git y github
-        - ¿Qué es el control de versiones? 
-        - ¿Qué es git?
-        - ¿Qué es github?
-        - Combinando R con git
- 
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Contenidos de la capacitación
+
 ---
 
 class: center, middle
@@ -1664,6 +1640,10 @@ Y luego lo cargamos en nuestra sesión (.pur[no basta con instalarlo para usarlo
 library(guaguas)
 ```
 
+```
+## Warning: package 'guaguas' was built under R version 4.0.3
+```
+
 --
 
 Es una base de .medium-par-red[alto interés sociológico]. 🧐
@@ -1916,6 +1896,10 @@ Cargamos la librería.
 
 ```r
 library(tidyverse)
+```
+
+```
+## Warning: package 'tidyverse' was built under R version 4.0.3
 ```
 
 --

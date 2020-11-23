@@ -1,0 +1,244 @@
+---
+title: "Capacitación en R y herramientas de productividad"
+subtitle: "Sesión 1"  
+author: 
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    seal: false
+    #lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: False
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Ejercicio para la 🏠
+
+--
+
+Vamos a trabajar con una base real de la **Encuesta Nacional Urbana de Seguridad Ciudadana (ENUSC)**, que levanta el INE año a año. Utilizaremos la última versión publicada (2019). 
+
+--
+
+Para la ENUSC, un **hogar victimizado** es aquel en el cual durante el último año **alguno de sus miembros fue víctima de al menos uno de los siguientes delitos:** 
+
+--
+
+- robo con intimidación (**A1_1_1**)
+- robo por sorpresa (**B1_1_1**)
+- robo con fuerza en la vivienda (**C1_1_1**)
+- hurto (**D1_1_1**)
+- lesiones (**E1_1_1**)
+- robo de vehículo (**G1_1_1**)
+- robo desde vehículo (**H1_1_1**)
+
+--
+
+Es decir, basta con tener un valor 1 (sí) en cualquiera de estas variables para que este hogar sea **victimizado**.
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Ejercicio para la 🏠
+
+## Ahora sí el ejercicio:
+
+En primer lugar debes Descargar la base de datos 2019 desde el [sitio de la ENUSC en la página del INE](https://www.ine.cl/estadisticas/sociales/seguridad-publica-y-justicia/seguridad-ciudadana). Puedes descargarla en formato .csv o en .sav (SPSS).  Crea o escoge un fichero en tu computador y descomprimer el archivo ahí.
+
+--
+
+1- Utilizando las funciones de **importación** aprendidas, carga la base de datos en tu entorno de trabajo de **R**.
+
+--
+
+2- ¿Cuántas observaciones y cuantas variables tiene la base?
+
+--
+
+3- La base es un poco **grande** y los nombres de las variables **poco intuitivos** 😵. Simplifiquemos la base:
+
+--
+
+    - filtrando solo a los informantes de la encuesta (Kish == 1).
+    
+    - seleccionando solo las variables que que usaremos (`enc_region` y   
+    las variables de victimización indicadas en la lámina anterior)
+    
+    - y renombrando estas variables para hacerlas más entendibles (sugerencia: region,
+    intimidacion, sorpresa, fuerza_viv, hurto, lesiones, de_vehiculo, desde_vehiculo) 
+    
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Ejercicio para la 🏠
+
+--
+    
+  Puedes hacer todo lo anterior en una sola instrucción usando `pipes` (`%>%`). Te recomendamos guardarla en un objeto diferente, por ejemplo: `enusc_2`.
+  
+--
+
+ 4- ¿Cuántas observaciones y cuantas variables tiene tu base ahora?
+
+--
+
+ 5- Ahora, Genera una **variable dicotómica con valores 0 y 1** que indique, a partir de las variables de delitos, si un hogar ha sido víctima de al menos un delito. Crearla dentro de la base de datos y ponerle como nombre `VA_DC_2`.
+
+--
+
+ 6- Compara la victimización agregada que calculamos (`VA_DC_2`) con la que ya viene construida en la base original (`VA_DC`). ¿Son iguales?
+
+--
+
+ 7- Crear una tabla que muestre la victimización agregada para cada región (**Sin usar factores de expansión**).
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Ejercicio para la 🏠
+
+**hint 1** 👀:
+
+Puedes usar `ifelse()`, a través de mutate, para generar variables dicotómicas.
+
+```{r, eval = F}
+enusc_2 <- enusc_2 %>% 
+  mutate(intimidacion = ifelse(intimidacion==1,1,0))
+```
+
+--
+
+**hint 2** 🕵:
+
+Existe una función llamada `rowSums()`. que te podría servir para sumar un total fila sobre un set de variables.
+
+--
+
+**hint 3** 🥸:
+
+Los valores `NA` son muy contagiosos. Puedes evitar su influencia usando el argumento `na.rm = TRUE`.
+
+
+.center[🤔🧠]
+
+
+---
+
+## solución
+
+
+1. cargar
+
+```{r}
+library(haven)
+enusc <- read_sav("data/base-de-datos---xvi-enusc-2019-(sav).sav")
+```
+
+2. dimensiones
+
+```{r}
+dim(enusc)
+```
+
+3. Transformación
+
+```{r}
+library(dplyr)
+enusc_2 <- enusc %>% filter(Kish==1) %>%
+  select(enc_region, VA_DC, A1_1_1, B1_1_1, C1_1_1, D1_1_1,
+         E1_1_1, G1_1_1, H1_1_1) %>%
+  rename(region = enc_region, intimidacion = A1_1_1, 
+         sorpresa = B1_1_1, fuerza_viv = C1_1_1,
+         hurto = D1_1_1, lesiones = E1_1_1, 
+         de_vehiculo = G1_1_1, desde_vehiculo= H1_1_1)
+
+```
+
+3.1 Alternativa de transformación más resumida
+
+```{r}
+library(dplyr)
+enusc_2 <- enusc %>% filter(Kish==1) %>%
+  select(region = enc_region, 
+         VA_DC, 
+         intimidacion = A1_1_1,
+         sorpresa = B1_1_1,
+         fuerza_viv = C1_1_1,
+         hurto = D1_1_1,
+         lesiones =  E1_1_1,
+         de_vehiculo = G1_1_1,
+         desde_vehiculo= H1_1_1, 
+         Fact_Hog)
+```
+
+
+4. nuevas dimensiones
+
+```{r}
+dim(enusc_2)
+```
+5. dicotomizar variables
+
+```{r}
+enusc_2 <- enusc_2 %>% 
+  mutate(intimidacion = ifelse(intimidacion==1,1,0), 
+         sorpresa = ifelse(sorpresa==1,1,0), 
+         fuerza_viv = ifelse(fuerza_viv==1,1,0),
+         hurto = ifelse(hurto==1,1,0), 
+         lesiones = ifelse(lesiones==1,1,0),
+         de_vehiculo = ifelse(de_vehiculo==1,1,0),
+         desde_vehiculo = ifelse(desde_vehiculo==1,1,0))
+```
+
+calcular `VA_DC_2`. 
+
+```{r}
+enusc_2 <- enusc_2 %>% mutate(suma = rowSums(enusc_2[3:9],
+                                             na.rm = TRUE))
+enusc_2 <- enusc_2 %>% mutate(VA_DC_2 = if_else(suma>=1, 1, 0))
+```
+
+6. ¿Sin iguales?
+
+```{r}
+sum(enusc_2$VA_DC!=enusc_2$VA_DC_2)
+```
+
+
+7. tabular victimización por región sin expandir
+```{r}
+enusc_2 %>% group_by(region) %>% 
+  summarise(vic_hog = mean(VA_DC_2))
+```
+
+
+8. BONUS: tabulado con factor de expansión.
+
+```{r}
+library(dplyr)
+
+enusc_2 %>% summarise(vict = weighted.mean(VA_DC_2, Fact_Hog))
+
+enusc_2 %>% group_by(region) %>% 
+  summarise(vict = weighted.mean(VA_DC_2, Fact_Hog))
+
+
+```
+
+
